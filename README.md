@@ -7,7 +7,7 @@ needs to generate a SAML signing keypair and a Service Provider metadata file.
 
 In the example below, we're going to use the script to generate SP metadata for the SIG General SSB application.
 The base URL for the application is: https://banner.ban.sig.sh/BannerGeneralSsb
-
+```
 [ladmin@weathertop saml]$ ls -l
 total 8
 drwxr-xr-x. 2 ladmin luminis   29 Oct 20 05:20 rockhurst
@@ -60,6 +60,7 @@ total 24
 
 [ladmin@weathertop saml]$ vi working-directory-20221025-155508/sp-metadata.xml
 [ladmin@weathertop saml]$
+```
 
 What if you already have a signing certificate to use?
 /A keypair may have been provided, or this might not be the first application in the environment and a keypair already exists.
@@ -67,16 +68,19 @@ Enter 'N' or 'n' at the 'Do you need to generate a certificate?' prompt and the 
 
 In the example below, we have an existing keystore named 'exampleKeystore.jks' and it contains a keypair under the 'samlsigning' alias.
 
+```
 [ladmin@weathertop saml]$ keytool -genkeypair -keyalg RSA -alias samlsigning -dname "CN=saml-banner-test.ban.sig.sh,OU=IT,O=SIG,L=San Diego,ST=CA,C=US" -validity 1825 -keysize 2048 -sigalg SHA256withRSA -keystore exampleKeystore.jks
 Enter keystore password:
 Re-enter new password:
 Enter key password for <samlsigning>
         (RETURN if same as keystore password):
 [ladmin@weathertop saml]$
+```
 
 The 'samltool.sh' script is run for the 'Student Registration SSB' application this time.
 After entering 'N' or 'n' at the prompt to generate a certificate, the script will prompt the user for the necessary keystore details.
 
+```
 [ladmin@weathertop saml]$ ./samltool.sh
 --------------------------------------------
 █▀ █ █▀▀   █▀ ▄▀█ █▀▄▀█ █    ▀█▀ █▀█ █▀█ █
@@ -117,3 +121,4 @@ total 20
 -rw-r--r--. 1 ladmin luminis 1215 Oct 25 16:00 saml-signing-temp.crt
 -rw-r--r--. 1 ladmin luminis 4140 Oct 25 16:00 sp-metadata.xml
 [ladmin@weathertop saml]$
+```
